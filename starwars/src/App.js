@@ -6,7 +6,7 @@ import styled from "styled-components"
 
 const App = () => {
   const Button = styled.button`
-    border: 2px solid black;
+    border: 1px solid black;
     background-color: rgba(255,255,255,.7);
     &:hover {
       background-color: white;
@@ -14,6 +14,8 @@ const App = () => {
     cursor: pointer;
     padding: 5px;
     width: 90px;
+    margin: 0 5px;
+    border-radius: 2px;
   `
   const [fullObject, setFullObject] = useState({})
   const [characters, setCharacters] = useState([])
@@ -24,7 +26,6 @@ const App = () => {
     axios
       .get(nextPage)
       .then(response => {
-        console.log(response.data)
         setFullObject(response.data)
         setCharacters(response.data.results)
       })
@@ -34,9 +35,19 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
+      <Button 
+        className={!fullObject.previous && 'hide'} 
+        onClick={()=> setNextPage(fullObject.previous)}>
+          {`<- Previous`}
+      </Button>
+      <Button 
+        className={!fullObject.next && 'hide'} 
+        onClick={()=> setNextPage(fullObject.next)}>
+          {`Next ->`}
+      </Button>
       {characters.map(person=> {
         return (
-          <Person person={person}/>
+          <Person key={person.name} person={person}/>
         )
       })}
       <Button 
@@ -55,3 +66,5 @@ const App = () => {
 }
 
 export default App;
+
+
