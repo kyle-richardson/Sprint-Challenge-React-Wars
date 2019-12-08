@@ -26,13 +26,33 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] What is React JS and what problems does it try and solve? Support your answer with concepts introduced in class and from your personal research on the web.
 
+    It is a framework/library for JS that attempts to make the process of manipulating and working with the DOM API much simpler and straightforward, by creating a virtual DOM and allowing recognizable syntax (html-like tags) to dictate site structure. This process is called 'reconciliation', where React JS handles updating the virtual DOM and triggers re-render of app/page when state/props change. 
+
 - [ ] What does it mean to _think_ in react?
+
+    It means to think in a declarative way, a way to bridge components and functionality together in a single file structure/syntax that is easy to parse.
+
+    To think through a problem or app in react is to first separate it out into components that can be repeated, then determine the basic structure of the page, determine how state or data will be transferred around, then setup the data flow.
 
 - [ ] Describe state.
 
+    State is a way of passing information around components without fear of the object mutating or changing 'down the ladder' and no way to relay the change 'up the ladder'.  It allows a child component or other functions to reference the Object necessary, and even change it, and allowing that object to be essentially a singular value shared across all components in the app. 
+
 - [ ] Describe props.
 
+    basically the same idea as parameters for javascript functions, except instead of simply passed into the body of the function, they are passed into a component function.  The way they are passed down differs as well, in React/JSX syntax.  <ComponentName firstProp={firstObjectName} secondProp={secondObjectName}/> is then able to be read by the child component as such: 
+    const ComponentName = (props) => {
+        return(
+            <div>
+                <h1>`${props.firstProp}`</h1> //this references firstObjectName 
+                <h2>`${props.secondProp}`</h2> //this references secondObjectName
+            </div>
+        )
+    }
+
 - [ ] What are side effects, and how do you sync effects in a React component to state or prop changes?
+
+    In React, side effects are unintended consequences of state or prop changes.  One way to sync effects to specific prop or state changes is to use React.useEffect(function, []).  This function has a 2nd parameter that takes in an array of objects which specifies the set of objects that will trigger useEffect() to be called again after a re-render.  By having this control, you are able to prevent most side effects that arise as a result of prop or state changes that force a re-render.  You are also able to cleanup functions on "unmount", further preventing side effects.
 
 ## Project Set Up
 
